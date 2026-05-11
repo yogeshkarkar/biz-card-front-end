@@ -12,6 +12,7 @@ import { LinksBuilder } from "@/components/dashboard/LinksBuilder";
 import { DesignBuilder } from "@/components/dashboard/DesignBuilder";
 import { QRCodeBuilder } from "@/components/dashboard/QRCodeBuilder";
 import { EmailSignatureBuilder } from "@/components/dashboard/EmailSignatureBuilder";
+import { SettingsBuilder } from "@/components/dashboard/SettingsBuilder";
 import { LivePreview } from "@/components/dashboard/LivePreview";
 import { ThemeToggle } from "@/components/dashboard/ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -60,6 +61,8 @@ export default function Dashboard() {
         return <QRCodeBuilder />;
       case "signature":
         return <EmailSignatureBuilder />;
+      case "settings":
+        return <SettingsBuilder />;
       default:
         return <ComingSoon title={SECTION_TITLES[activeSection] || "This section"} />;
     }
