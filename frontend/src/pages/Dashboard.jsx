@@ -11,6 +11,7 @@ import { CardBuilder } from "@/components/dashboard/CardBuilder";
 import { LinksBuilder } from "@/components/dashboard/LinksBuilder";
 import { DesignBuilder } from "@/components/dashboard/DesignBuilder";
 import { QRCodeBuilder } from "@/components/dashboard/QRCodeBuilder";
+import { EmailSignatureBuilder } from "@/components/dashboard/EmailSignatureBuilder";
 import { LivePreview } from "@/components/dashboard/LivePreview";
 import { ThemeToggle } from "@/components/dashboard/ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -57,6 +58,8 @@ export default function Dashboard() {
         return <DesignBuilder />;
       case "qr":
         return <QRCodeBuilder />;
+      case "signature":
+        return <EmailSignatureBuilder />;
       default:
         return <ComingSoon title={SECTION_TITLES[activeSection] || "This section"} />;
     }
