@@ -15,12 +15,12 @@ import { cn } from "@/lib/utils";
 import { useCard } from "@/contexts/CardContext";
 import { Badge } from "@/components/ui/badge";
 
-const groups = [
+const groupsFor = (linkCount) => [
   {
     label: "Content",
     items: [
       { id: "about", label: "About", icon: UserCircle },
-      { id: "links", label: "Links", icon: LinkSimple, badge: "5" },
+      { id: "links", label: "Links", icon: LinkSimple, badge: String(linkCount) },
     ],
   },
   {
@@ -45,6 +45,7 @@ const groups = [
 
 export const Sidebar = ({ onItemClick }) => {
   const { activeSection, setActiveSection, card } = useCard();
+  const groups = groupsFor(card.links.length);
 
   const handleClick = (id) => {
     setActiveSection(id);

@@ -8,6 +8,9 @@ import {
   InstagramLogo,
   TiktokLogo,
   FacebookLogo,
+  XLogo,
+  YoutubeLogo,
+  DribbbleLogo,
   CaretRight,
   IdentificationCard,
   Globe,
@@ -15,7 +18,7 @@ import {
   ShareNetwork,
   DownloadSimple,
 } from "@phosphor-icons/react";
-import { useCard } from "@/contexts/CardContext";
+import { useCard, PLATFORMS, getLinkLabel } from "@/contexts/CardContext";
 import { cn } from "@/lib/utils";
 
 const iconMap = {
@@ -24,14 +27,10 @@ const iconMap = {
   InstagramLogo,
   TiktokLogo,
   FacebookLogo,
-};
-
-const brandColors = {
-  linkedin: "from-[#0a66c2] to-[#0a66c2]",
-  github: "from-foreground to-foreground",
-  instagram: "from-[#f58529] via-[#dd2a7b] to-[#8134af]",
-  tiktok: "from-foreground to-foreground",
-  facebook: "from-[#1877f2] to-[#1877f2]",
+  XLogo,
+  YoutubeLogo,
+  DribbbleLogo,
+  Globe,
 };
 
 export const LivePreview = () => {
@@ -118,13 +117,15 @@ export const LivePreview = () => {
           <PreviewLink icon={EnvelopeSimple} label={card.email} colorClass="text-primary" bg="bg-accent" />
           <PreviewLink icon={Phone} label={card.phone} colorClass="text-success" bg="bg-success-soft" />
           {card.links.map((link) => {
-            const Icon = iconMap[link.icon] || Globe;
+            const platform = PLATFORMS[link.platform] || PLATFORMS.website;
+            const Icon = iconMap[platform.icon] || Globe;
+            if (!link.handle) return null;
             return (
               <PreviewLink
                 key={link.id}
                 icon={Icon}
-                label={link.label}
-                gradient={brandColors[link.id]}
+                label={getLinkLabel(link.platform, link.handle)}
+                gradient={platform.gradient}
               />
             );
           })}

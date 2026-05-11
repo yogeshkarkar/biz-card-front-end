@@ -8,13 +8,53 @@ import {
 } from "@phosphor-icons/react";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { CardBuilder } from "@/components/dashboard/CardBuilder";
+import { LinksBuilder } from "@/components/dashboard/LinksBuilder";
 import { LivePreview } from "@/components/dashboard/LivePreview";
 import { ThemeToggle } from "@/components/dashboard/ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Toaster } from "@/components/ui/sonner";
+import { useCard } from "@/contexts/CardContext";
+
+const SECTION_TITLES = {
+  about: "About",
+  links: "Links",
+  design: "Design",
+  qr: "QR Code",
+  signature: "Email Signature",
+  settings: "Settings",
+  subscription: "Subscription",
+};
+
+const ComingSoon = ({ title }) => (
+  <div className="mx-auto w-full max-w-3xl animate-fade-up">
+    <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-16 text-center shadow-sm">
+      <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow">
+        <Lightning size={22} weight="fill" />
+      </div>
+      <h2 className="font-display text-[20px] font-semibold tracking-tight text-foreground">
+        {title} is coming soon
+      </h2>
+      <p className="mx-auto mt-2 max-w-md text-[13.5px] text-muted-foreground">
+        We&apos;re polishing this section. Stay tuned — your card builder is getting smarter every week.
+      </p>
+    </div>
+  </div>
+);
 
 export default function Dashboard() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { activeSection } = useCard();
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case "about":
+        return <CardBuilder />;
+      case "links":
+        return <LinksBuilder />;
+      default:
+        return <ComingSoon title={SECTION_TITLES[activeSection] || "This section"} />;
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-background">
@@ -45,7 +85,9 @@ export default function Dashboard() {
               </Sheet>
 
               <div className="hidden items-center gap-2 sm:flex">
-                <span className="font-display text-[15px] font-semibold text-foreground">About</span>
+                <span className="font-display text-[15px] font-semibold text-foreground">
+                  {SECTION_TITLES[activeSection] || "Dashboard"}
+                </span>
                 <span className="rounded-md bg-accent px-2 py-0.5 text-[11px] font-semibold text-accent-foreground">
                   v2.4
                 </span>
@@ -98,7 +140,7 @@ export default function Dashboard() {
           <main className="flex-1">
             <div className="mx-auto flex max-w-[1400px] flex-col gap-6 px-4 py-6 sm:px-6 lg:flex-row lg:gap-8 lg:px-8 lg:py-8">
               <div className="min-w-0 flex-1">
-                <CardBuilder />
+                {renderSection()}
               </div>
               <div className="flex justify-center lg:block lg:w-[340px] lg:flex-shrink-0">
                 <LivePreview />

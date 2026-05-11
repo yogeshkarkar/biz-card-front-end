@@ -1,4 +1,16 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback, useMemo } from "react";
+
+export const PLATFORMS = {
+  linkedin: { label: "LinkedIn", icon: "LinkedinLogo", urlPrefix: "linkedin.com/in/", gradient: "from-[#0a66c2] to-[#0a66c2]" },
+  github: { label: "GitHub", icon: "GithubLogo", urlPrefix: "github.com/", gradient: "from-foreground to-foreground" },
+  instagram: { label: "Instagram", icon: "InstagramLogo", urlPrefix: "instagram.com/", gradient: "from-[#f58529] via-[#dd2a7b] to-[#8134af]" },
+  tiktok: { label: "TikTok", icon: "TiktokLogo", urlPrefix: "tiktok.com/@", gradient: "from-foreground to-foreground" },
+  facebook: { label: "Facebook", icon: "FacebookLogo", urlPrefix: "facebook.com/", gradient: "from-[#1877f2] to-[#1877f2]" },
+  twitter: { label: "X / Twitter", icon: "XLogo", urlPrefix: "x.com/", gradient: "from-foreground to-foreground" },
+  youtube: { label: "YouTube", icon: "YoutubeLogo", urlPrefix: "youtube.com/@", gradient: "from-[#ff0000] to-[#cc0000]" },
+  dribbble: { label: "Dribbble", icon: "DribbbleLogo", urlPrefix: "dribbble.com/", gradient: "from-[#ea4c89] to-[#ea4c89]" },
+  website: { label: "Website", icon: "Globe", urlPrefix: "https://", gradient: "from-primary to-primary-glow" },
+};
 
 const defaultCard = {
   handle: "yogeshk",
@@ -13,13 +25,19 @@ const defaultCard = {
   coverPhoto: "https://images.unsplash.com/photo-1456300633423-f52385ce7bfd?w=800&h=400&fit=crop",
   logoColor: "243 75% 60%",
   links: [
-    { id: "linkedin", label: "linkedin.com/in/yogeshkarkar", icon: "LinkedinLogo" },
-    { id: "github", label: "github.com/yogesh-k", icon: "GithubLogo" },
-    { id: "instagram", label: "instagram.com/yogesh.k", icon: "InstagramLogo" },
-    { id: "tiktok", label: "tiktok.com/@yogeshk", icon: "TiktokLogo" },
-    { id: "facebook", label: "facebook.com/yogeshkarkar", icon: "FacebookLogo" },
+    { id: "l1", platform: "linkedin", handle: "yogeshkarkar" },
+    { id: "l2", platform: "github", handle: "yogesh-k" },
+    { id: "l3", platform: "instagram", handle: "yogesh.k" },
+    { id: "l4", platform: "tiktok", handle: "yogeshk" },
+    { id: "l5", platform: "facebook", handle: "yogeshkarkar" },
   ],
 };
+
+export function getLinkLabel(platform, handle) {
+  const p = PLATFORMS[platform];
+  if (!p) return handle;
+  return `${p.urlPrefix}${handle}`;
+}
 
 const CardContext = createContext(null);
 
@@ -35,11 +53,30 @@ export function CardProvider({ children }) {
     setCard((c) => ({ ...c, links }));
   }, []);
 
-  return (
-    <CardContext.Provider value={{ card, updateField, updateLinks, activeSection, setActiveSection }}>
-      {children}
-    </CardContext.Provider>
+  const addLink = useCallback((platform = "website") => {
+    setCard((c) => ({
+      ...c,
+      links: [...c.links, { id: `l${Date.now()}`, platform, handle: "" }],
+    }));
+  }, []);
+
+  const updateLink = useCallback((id, patch) => {
+    setCard((c) => ({
+      ...c,
+      links: c.links.map((l) => (l.id === id ? { ...l, ...patch } : l)),
+    }));
+  }, []);
+
+  const removeLink = useCallback((id) => {
+    setCard((c) => ({ ...c, links: c.links.filter((l) => l.id !== id) }));
+  }, []);
+
+  const value = useMemo(
+    () => ({ card, updateField, updateLinks, addLink, updateLink, removeLink, activeSection, setActiveSection }),
+    [card, updateField, updateLinks, addLink, updateLink, removeLink, activeSection]
   );
+
+  return <CardContext.Provider value={value}>{children}</CardContext.Provider>;
 }
 
 export function useCard() {
