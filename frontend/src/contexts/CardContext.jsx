@@ -31,6 +31,36 @@ const defaultCard = {
     { id: "l4", platform: "tiktok", handle: "yogeshk" },
     { id: "l5", platform: "facebook", handle: "yogeshkarkar" },
   ],
+  design: {
+    theme: "light",          // light | dark
+    accent: "indigo",        // preset key
+    accentHex: "#5b5bf5",    // current color value
+    layout: "rounded",       // rounded | pill | sharp
+    font: "modern",          // modern | classic | mono
+    showCover: true,
+  },
+};
+
+export const ACCENT_PRESETS = {
+  indigo:  { hex: "#5b5bf5", label: "Indigo",  primaryHsl: "243 75% 60%", glowHsl: "262 83% 70%" },
+  violet:  { hex: "#8b5cf6", label: "Violet",  primaryHsl: "262 83% 65%", glowHsl: "272 90% 75%" },
+  rose:    { hex: "#f43f5e", label: "Rose",    primaryHsl: "350 89% 60%", glowHsl: "340 95% 70%" },
+  amber:   { hex: "#f59e0b", label: "Amber",   primaryHsl: "32 95% 55%",  glowHsl: "40 95% 65%" },
+  emerald: { hex: "#10b981", label: "Emerald", primaryHsl: "160 70% 42%", glowHsl: "152 70% 52%" },
+  sky:     { hex: "#0ea5e9", label: "Sky",     primaryHsl: "199 89% 50%", glowHsl: "192 85% 60%" },
+  slate:   { hex: "#475569", label: "Slate",   primaryHsl: "215 25% 32%", glowHsl: "215 20% 50%" },
+};
+
+export const FONT_OPTIONS = {
+  modern:  { label: "Modern",  family: "'Inter', 'Space Grotesk', sans-serif",  sample: "Aa" },
+  classic: { label: "Classic", family: "'Playfair Display', Georgia, serif",     sample: "Aa" },
+  mono:    { label: "Mono",    family: "'JetBrains Mono', 'Fira Code', monospace", sample: "Aa" },
+};
+
+export const LAYOUT_OPTIONS = {
+  rounded: { label: "Rounded", radius: "rounded-xl" },
+  pill:    { label: "Pill",    radius: "rounded-full" },
+  sharp:   { label: "Sharp",   radius: "rounded-md" },
 };
 
 export function getLinkLabel(platform, handle) {
@@ -71,9 +101,13 @@ export function CardProvider({ children }) {
     setCard((c) => ({ ...c, links: c.links.filter((l) => l.id !== id) }));
   }, []);
 
+  const updateDesign = useCallback((patch) => {
+    setCard((c) => ({ ...c, design: { ...c.design, ...patch } }));
+  }, []);
+
   const value = useMemo(
-    () => ({ card, updateField, updateLinks, addLink, updateLink, removeLink, activeSection, setActiveSection }),
-    [card, updateField, updateLinks, addLink, updateLink, removeLink, activeSection]
+    () => ({ card, updateField, updateLinks, addLink, updateLink, removeLink, updateDesign, activeSection, setActiveSection }),
+    [card, updateField, updateLinks, addLink, updateLink, removeLink, updateDesign, activeSection]
   );
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

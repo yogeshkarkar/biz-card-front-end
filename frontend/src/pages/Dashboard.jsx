@@ -9,6 +9,7 @@ import {
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { CardBuilder } from "@/components/dashboard/CardBuilder";
 import { LinksBuilder } from "@/components/dashboard/LinksBuilder";
+import { DesignBuilder } from "@/components/dashboard/DesignBuilder";
 import { LivePreview } from "@/components/dashboard/LivePreview";
 import { ThemeToggle } from "@/components/dashboard/ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -51,6 +52,8 @@ export default function Dashboard() {
         return <CardBuilder />;
       case "links":
         return <LinksBuilder />;
+      case "design":
+        return <DesignBuilder />;
       default:
         return <ComingSoon title={SECTION_TITLES[activeSection] || "This section"} />;
     }
