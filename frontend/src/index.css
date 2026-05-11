@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand: BitCard — sophisticated indigo / violet with cool neutrals */
+    --background: 220 33% 97%;
+    --foreground: 224 47% 11%;
+
+    --surface: 220 30% 99%;
+    --surface-muted: 220 25% 94%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 47% 11%;
+
+    --primary: 243 75% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 252 83% 70%;
+
+    --secondary: 220 25% 96%;
+    --secondary-foreground: 224 40% 18%;
+
+    --muted: 220 20% 95%;
+    --muted-foreground: 220 12% 46%;
+
+    --accent: 252 83% 96%;
+    --accent-foreground: 243 75% 35%;
+
+    --success: 152 65% 42%;
+    --success-foreground: 0 0% 100%;
+    --success-soft: 152 70% 94%;
+
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 18% 90%;
+    --input: 220 18% 90%;
+    --ring: 243 75% 60%;
+
+    --sidebar-background: 220 30% 96%;
+    --sidebar-foreground: 224 35% 22%;
+    --sidebar-accent: 220 25% 92%;
+    --sidebar-border: 220 18% 88%;
+
+    --chart-1: 243 75% 60%;
+    --chart-2: 192 85% 50%;
+    --chart-3: 262 83% 65%;
+    --chart-4: 32 95% 60%;
+    --chart-5: 152 65% 45%;
+
+    --radius: 0.75rem;
+
+    /* gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(243 75% 60%) 0%, hsl(262 83% 65%) 100%);
+    --gradient-mesh: radial-gradient(at 20% 20%, hsl(243 75% 60% / 0.12) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(262 83% 65% / 0.10) 0px, transparent 50%), radial-gradient(at 100% 80%, hsl(192 85% 50% / 0.08) 0px, transparent 50%);
+    --gradient-cover: linear-gradient(135deg, hsl(243 75% 60%) 0%, hsl(262 83% 65%) 50%, hsl(192 85% 60%) 100%);
+
+    /* shadows */
+    --shadow-xs: 0 1px 2px hsl(224 47% 11% / 0.04);
+    --shadow-sm: 0 1px 3px hsl(224 47% 11% / 0.06), 0 1px 2px hsl(224 47% 11% / 0.04);
+    --shadow-md: 0 4px 12px -2px hsl(224 47% 11% / 0.06), 0 2px 6px -1px hsl(224 47% 11% / 0.04);
+    --shadow-lg: 0 12px 32px -8px hsl(224 47% 11% / 0.10), 0 4px 12px -4px hsl(224 47% 11% / 0.06);
+    --shadow-xl: 0 24px 48px -16px hsl(243 50% 30% / 0.18), 0 8px 24px -8px hsl(224 47% 11% / 0.08);
+    --shadow-glow: 0 8px 32px hsl(243 75% 60% / 0.25);
+
+    --transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 224 47% 6%;
+    --foreground: 220 25% 96%;
+
+    --surface: 224 40% 8%;
+    --surface-muted: 224 35% 12%;
+
+    --card: 224 40% 9%;
+    --card-foreground: 220 25% 96%;
+
+    --popover: 224 40% 9%;
+    --popover-foreground: 220 25% 96%;
+
+    --primary: 252 83% 68%;
+    --primary-foreground: 224 47% 6%;
+    --primary-glow: 262 90% 75%;
+
+    --secondary: 224 30% 14%;
+    --secondary-foreground: 220 25% 96%;
+
+    --muted: 224 30% 13%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 252 50% 18%;
+    --accent-foreground: 252 90% 85%;
+
+    --success: 152 65% 50%;
+    --success-foreground: 224 47% 6%;
+    --success-soft: 152 50% 14%;
+
+    --destructive: 0 72% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 224 25% 16%;
+    --input: 224 25% 16%;
+    --ring: 252 83% 68%;
+
+    --sidebar-background: 224 45% 7%;
+    --sidebar-foreground: 220 20% 80%;
+    --sidebar-accent: 224 35% 13%;
+    --sidebar-border: 224 25% 14%;
+
+    --chart-1: 252 83% 68%;
+    --chart-2: 192 85% 60%;
+    --chart-3: 262 90% 75%;
+    --chart-4: 32 95% 65%;
+    --chart-5: 152 65% 55%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(252 83% 60%) 0%, hsl(262 90% 70%) 100%);
+    --gradient-mesh: radial-gradient(at 20% 20%, hsl(252 83% 60% / 0.18) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(262 90% 70% / 0.14) 0px, transparent 50%), radial-gradient(at 100% 80%, hsl(192 85% 50% / 0.10) 0px, transparent 50%);
+    --gradient-cover: linear-gradient(135deg, hsl(252 83% 55%) 0%, hsl(262 83% 60%) 50%, hsl(192 85% 50%) 100%);
+
+    --shadow-xs: 0 1px 2px hsl(0 0% 0% / 0.25);
+    --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.30), 0 1px 2px hsl(0 0% 0% / 0.20);
+    --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.40), 0 2px 6px -1px hsl(0 0% 0% / 0.25);
+    --shadow-lg: 0 12px 32px -8px hsl(0 0% 0% / 0.50), 0 4px 12px -4px hsl(0 0% 0% / 0.35);
+    --shadow-xl: 0 24px 48px -16px hsl(0 0% 0% / 0.60), 0 8px 24px -8px hsl(0 0% 0% / 0.40);
+    --shadow-glow: 0 8px 32px hsl(252 83% 68% / 0.35);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+  }
+  input, textarea, button {
+    font-family: inherit;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 8px; border: 2px solid hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-mesh { background-image: var(--gradient-mesh); }
+  .bg-gradient-cover { background-image: var(--gradient-cover); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-card { box-shadow: var(--shadow-md); }
+  .shadow-card-lg { box-shadow: var(--shadow-lg); }
+  .shadow-card-xl { box-shadow: var(--shadow-xl); }
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.95); }
+  }
+  .animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up { animation: fade-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+  .animate-float { animation: float 4s ease-in-out infinite; }
+}
+
+@layer base {
+  [data-debug-wrapper="true"] { display: contents !important; }
+  [data-debug-wrapper="true"] > * {
+    margin-left: inherit; margin-right: inherit; margin-top: inherit; margin-bottom: inherit;
+    padding-left: inherit; padding-right: inherit; padding-top: inherit; padding-bottom: inherit;
+    column-gap: inherit; row-gap: inherit; gap: inherit;
+    border-left-width: inherit; border-right-width: inherit; border-top-width: inherit; border-bottom-width: inherit;
+    border-left-style: inherit; border-right-style: inherit; border-top-style: inherit; border-bottom-style: inherit;
+    border-left-color: inherit; border-right-color: inherit; border-top-color: inherit; border-bottom-color: inherit;
+  }
+}
