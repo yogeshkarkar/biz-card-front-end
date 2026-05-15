@@ -25,7 +25,11 @@ import {
 } from "@phosphor-icons/react";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
-import { CardMockup } from "@/components/marketing/CardMockup";
+
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=1200&q=80&fit=crop";
+const HOW_IMAGE =
+  "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80&fit=crop";
 
 const features = [
   {
@@ -328,27 +332,14 @@ export default function Landing() {
               />
             </div>
 
-            <div className="relative flex items-center justify-center gap-4">
-              <CardMockup
-                size="md"
-                className="rotate-[-6deg] transition-transform duration-500 hover:rotate-0"
-                name={showcase[0].name}
-                title={showcase[0].title}
-                company={showcase[0].company}
-                accent={showcase[0].accent}
-                avatar={showcase[0].avatar}
-                cover={showcase[0].cover}
-              />
-              <CardMockup
-                size="md"
-                className="hidden rotate-[5deg] transition-transform duration-500 hover:rotate-0 sm:block"
-                name={showcase[1].name}
-                title={showcase[1].title}
-                company={showcase[1].company}
-                accent={showcase[1].accent}
-                avatar={showcase[1].avatar}
-                cover={showcase[1].cover}
-                theme="dark"
+            <div className="relative flex items-center justify-center">
+              <img
+                src={HERO_IMAGE}
+                alt="BitCard digital business card on a smartphone"
+                className="relative w-full max-w-[520px] rounded-[32px] border border-border object-cover shadow-card-xl"
+                style={{ aspectRatio: "4 / 5" }}
+                loading="eager"
+                data-testid="hero-image"
               />
             </div>
           </div>
@@ -452,39 +443,14 @@ export default function Landing() {
 
             <div className="relative">
               <div className="absolute -inset-6 rounded-[40px] bg-gradient-primary opacity-10 blur-3xl" />
-              <div className="relative flex items-center justify-center gap-4 lg:gap-6">
-                <CardMockup
-                  size="sm"
-                  className="rotate-[-8deg]"
-                  name={showcase[2].name}
-                  title={showcase[2].title}
-                  company={showcase[2].company}
-                  accent={showcase[2].accent}
-                  avatar={showcase[2].avatar}
-                  cover={showcase[2].cover}
-                />
-                <CardMockup
-                  size="md"
-                  className="rotate-[2deg]"
-                  name={showcase[0].name}
-                  title={showcase[0].title}
-                  company={showcase[0].company}
-                  accent={showcase[0].accent}
-                  avatar={showcase[0].avatar}
-                  cover={showcase[0].cover}
-                />
-                <CardMockup
-                  size="sm"
-                  className="hidden rotate-[8deg] sm:block"
-                  name={showcase[1].name}
-                  title={showcase[1].title}
-                  company={showcase[1].company}
-                  accent={showcase[1].accent}
-                  avatar={showcase[1].avatar}
-                  cover={showcase[1].cover}
-                  theme="dark"
-                />
-              </div>
+              <img
+                src={HOW_IMAGE}
+                alt="Sharing a BitCard digital business card"
+                className="relative w-full rounded-[28px] border border-border object-cover shadow-card-xl"
+                style={{ aspectRatio: "4 / 3" }}
+                loading="lazy"
+                data-testid="how-image"
+              />
             </div>
           </div>
         </div>
