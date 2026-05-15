@@ -375,7 +375,7 @@ export default function Landing() {
       </section>
 
       {/* FEATURES */}
-      <section id="features" className="relative py-20 lg:py-28">
+      <section id="features" className="relative overflow-hidden py-20 lg:py-28">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
@@ -414,7 +414,7 @@ export default function Landing() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="relative border-y border-border bg-surface py-20 lg:py-28">
+      <section id="how" className="relative overflow-hidden border-y border-border bg-surface py-20 lg:py-28">
         <div className="pointer-events-none absolute inset-0 bg-gradient-mesh opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
@@ -491,7 +491,7 @@ export default function Landing() {
       </section>
 
       {/* SHOWCASE */}
-      <section id="showcase" className="relative py-20 lg:py-28">
+      <section id="showcase" className="relative overflow-hidden py-20 lg:py-28">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
             <div>
@@ -545,7 +545,7 @@ export default function Landing() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="relative border-t border-border bg-surface py-20 lg:py-28">
+      <section id="pricing" className="relative overflow-hidden border-t border-border bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
@@ -668,7 +668,7 @@ export default function Landing() {
       </section>
 
       {/* CTA */}
-      <section className="relative px-4 pb-20 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
         <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[32px] border border-border bg-gradient-primary p-10 text-center shadow-glow sm:p-14">
           <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/15 blur-3xl" />
           <div className="pointer-events-none absolute -right-16 -bottom-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />

@@ -17,7 +17,6 @@ import { SubscriptionBuilder } from "@/components/dashboard/SubscriptionBuilder"
 import { LivePreview } from "@/components/dashboard/LivePreview";
 import { ThemeToggle } from "@/components/dashboard/ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Toaster } from "@/components/ui/sonner";
 import { useCard } from "@/contexts/CardContext";
 
 const SECTION_TITLES = {
@@ -164,8 +163,6 @@ export default function Dashboard() {
           </main>
         </div>
       </div>
-
-      <Toaster position="bottom-right" />
     </div>
   );
 }
