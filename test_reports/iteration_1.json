@@ -1,0 +1,35 @@
+{
+  "summary": "Frontend-only testing of BitCard prototype: Landing, Login, Signup, and Dashboard Subscription tab. 25/27 checks passed. Two real issues found: (1) toast.error()/toast.success() on /login and /signup never render because <Toaster> is mounted only inside Dashboard.jsx. (2) Landing page has ~246px horizontal overflow at 375/390px width caused by decorative absolute elements in sections that lack overflow-hidden (how-it-works, showcase, pricing, CTA).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Login/Signup pages (sonner Toaster)", "issue": "toast.error('Please enter both email and password') and other toasts called from /login & /signup never appear in the DOM. The <Toaster> from @/components/ui/sonner is only rendered inside Dashboard.jsx (line 168). Auth pages have no Toaster mounted, so all toasts are silently lost (empty-submit error, successful sign-in success toast).", "selector": "[data-sonner-toast]", "priority": "HIGH"},
+      {"component": "Landing page (mobile)", "issue": "At 390x844 viewport scrollWidth=636px (overflow ~246px). Decorative absolute-positioned blurs/halos escape because sections #how, #showcase, #pricing and the bottom CTA wrapper do not have overflow-hidden. Examples: hero halo div w-[1100px], how-it-works absolute -inset-6 blur, feature card decor (-right-10 -top-10 w-32 inside cards that DO have overflow-hidden, but those are reported as overflowing because grid items still extend beyond viewport because parent grid uses gap-4 sm:grid-cols-2 but each card width is fine — primary culprits are the section-level decorative absolutes).", "selector": "body (scrollWidth)", "priority": "HIGH"}
+    ],
+    "integration_issues": [
+      {"flow": "Login empty-submit feedback", "issue": "User clicks Sign in with empty fields, no visible feedback because no Toaster mounted on /login.", "affected_selectors": ["[data-testid=submit-login]", "[data-sonner-toast]"]}
+    ],
+    "design_issues": [
+      {"screen": "Landing mobile @390px", "issues": ["Horizontal scroll due to decorative bg-gradient/blur absolute divs in sections without overflow-hidden"]}
+    ]
+  },
+  "test_report_links": ["/app/test_reports/iteration_1.json"],
+  "action_items": [
+    "Mount a global <Toaster /> in App.js (or in Landing/Login/Signup) so toast.error/toast.success rendered on auth pages are visible.",
+    "Add `overflow-hidden` to sections #how, #showcase, #pricing and the outer CTA section wrapper on Landing.jsx to prevent ~246px horizontal overflow on mobile (390px). Alternatively wrap all decorative blur halos in a parent with overflow-hidden."
+  ],
+  "critical_code_review_comments": [
+    "sonner Toaster is mounted only in Dashboard, so every toast call in Login.jsx and Signup.jsx is silently dropped — move Toaster to App.js as a sibling of <BrowserRouter> or render it on every page.",
+    "Sidebar.jsx subscription button lacks a data-testid (e.g. data-testid='sidebar-item-subscription'); test selected by text instead. Recommend adding data-testid for all sidebar items for stable automation.",
+    "Landing.jsx is 731 lines; consider splitting hero/features/pricing/FAQ into separate sub-components for maintainability.",
+    "Decorative absolute halos in multiple sections need a single overflow-hidden parent or use clamp/translate within bounds."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only run)", "frontend": "92.6% (25/27 functional checks)"},
+  "test_credentials": "N/A — mocked auth, any email+password redirects to /dashboard",
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Tested with Playwright at 1920x1080 and 390x844. All data-testid hooks for hero, faq, pricing, plan-card, btn-select, btn-cancel-subscription, billing-toggle, addon, oauth-google/apple, input-email/password/name, submit-login/signup, link-to-login/signup are present and functional. Theme toggle works (html class flips light↔dark). Subscription plan switching, billing monthly/yearly price change ($9↔$7 for Pro), addon toggles, invoice download toasts, and cancel-subscription toast all work because Dashboard mounts <Toaster>. The 2 failures above are the real fixes needed; everything else is green.",
+  "rca of the issue": "Toast bug RCA: Sonner's toast() function only renders when a <Toaster> component is mounted in the React tree. /app/frontend/src/pages/Dashboard.jsx mounts it (line 168) but App.js root and Login/Signup do not. Fix: add <Toaster position='bottom-right' /> inside App.js after <BrowserRouter> children (or globally). Mobile overflow RCA: sections without overflow-hidden allow w-[1100px] / -inset-6 / blur halos to extend past the viewport. Wrap them or add overflow-hidden to each section root."
+}
